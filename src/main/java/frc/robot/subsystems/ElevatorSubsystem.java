@@ -31,8 +31,8 @@ public void moveElevator (boolean y, boolean b, boolean sensorTriggerd){
   if(true){//!sensorTriggerd || getLeftEncoder()  < -1.6 
   if((b==true)&&(getLeftEncoder()<-.5)){
     if(getLeftEncoder()>-8.1){
-      m_leftElevator.set(.05);
-      m_rightElevator.set(.05);
+      m_leftElevator.set(.5);
+      m_rightElevator.set(.5);
       } else{
 m_leftElevator.set(.5);
 m_rightElevator.set(.5);
@@ -69,6 +69,7 @@ if(button){// && (!sensorTriggerd || getLeftEncoder()  < -1.6  )
   //decides if current pos is greater or less than target pos with the a buffer of .15
   
   //encoder values negative so signs are flipped
+
   if ((getLeftEncoder() > targetPos + 0.15)  ) {
 
     //decides which direction the motor should run, elevatorDirection is either 1 or -1

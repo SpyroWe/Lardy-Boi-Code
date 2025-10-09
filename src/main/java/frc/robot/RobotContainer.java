@@ -15,10 +15,12 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
+import frc.robot.Commands.EffectorCommand;
 import frc.robot.Commands.ElevatorCommand;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.EndEffector;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -33,7 +35,8 @@ public class RobotContainer {
     private final ElevatorSubsystem elevatorbase = new ElevatorSubsystem();
     private final CommandXboxController m_driverController = new CommandXboxController(0);
     private final CommandXboxController m_coDriverController = new CommandXboxController(1);
-
+    private final EndEffector effectorbase = new EndEffector();
+;
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
     private final CommandXboxController joystick = new CommandXboxController(0);
@@ -63,6 +66,14 @@ public class RobotContainer {
         () -> m_coDriverController.y().getAsBoolean(),
         () -> m_coDriverController.b().getAsBoolean()));
 
+        //effector
+        effectorbase.setDefaultCommand(new EffectorCommand(effectorbase,
+        () ->m_driverController.leftTrigger().getAsBoolean(),
+        () ->m_driverController.rightTrigger().getAsBoolean()
+        ));
+
+
+
         // Idle while the robot is disabled. This ensures the configured
         // neutral mode is applied to the drive motors while disabled.
         final var idle = new SwerveRequest.Idle();
@@ -83,7 +94,7 @@ public class RobotContainer {
         joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
         // reset the field-centric heading on left bumper press
-        joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+        joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));//previously joystick.leftBumper
 
         drivetrain.registerTelemetry(logger::telemeterize);
     }

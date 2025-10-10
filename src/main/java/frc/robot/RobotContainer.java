@@ -53,9 +53,9 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-joystick.getLeftY() * MaxSpeed/3) // Drive forward with negative Y (forward) Change speed here
-                    .withVelocityY(-joystick.getLeftX() * MaxSpeed/3) // Drive left with negative X (left)
-                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+                drive.withVelocityX(-joystick.getLeftY() * MaxSpeed/2) // Drive forward with negative Y (forward) Change speed here
+                    .withVelocityY(-joystick.getLeftX() * MaxSpeed/2) // Drive left with negative X (left)
+                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate/2) // Drive counterclockwise with negative X (left)
             )
         );
         //elevator
@@ -76,7 +76,7 @@ public class RobotContainer {
 
         // Idle while the robot is disabled. This ensures the configured
         // neutral mode is applied to the drive motors while disabled.
-        final var idle = new SwerveRequest.Idle();
+        /*final var idle = new SwerveRequest.Idle();
         RobotModeTriggers.disabled().whileTrue(
             drivetrain.applyRequest(() -> idle).ignoringDisable(true)
         );
@@ -84,7 +84,7 @@ public class RobotContainer {
         joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
         joystick.b().whileTrue(drivetrain.applyRequest(() ->
             point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
-        ));
+        ));*/
 
         // Run SysId routines when holding back/start and X/Y.
         // Note that each routine should be run exactly once in a single log.

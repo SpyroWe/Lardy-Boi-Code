@@ -42,7 +42,7 @@ public class ElevatorCommand extends Command {
   public void execute() {
     SmartDashboard.putBoolean("co_Y", co_yButton.getAsBoolean());
   elevatorbase.moveElevator(yButton.getAsBoolean(), bButton.getAsBoolean(),false);
-   elevatorbase.setPoint(co_aButton.getAsBoolean(), elevatorConstants.setPoint1,false );
+   elevatorbase.setPoint(co_aButton.getAsBoolean(), elevatorConstants.setPoint1,false);
    elevatorbase.setPoint(co_bButton.getAsBoolean(), elevatorConstants.setPoint2,false);
    elevatorbase.setPoint(co_yButton.getAsBoolean(), elevatorConstants.setPoint3,false);
    SmartDashboard.putNumber("LeftELEencoder", elevatorbase.getLeftEncoder());

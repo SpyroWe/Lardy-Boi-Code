@@ -82,7 +82,7 @@ if(button){// && (!sensorTriggerd || getLeftEncoder()  < -1.6  )
       m_rightElevator.set(-0.05 *elevatorDirection);
     } 
     //changes speeds based on elvator position relative to target position
-    else if (((getLeftEncoder() - targetPos)*elevatorDirection < 6) ){
+    else if (((getLeftEncoder() - targetPos)*elevatorDirection < 6)){
       m_leftElevator.set(-0.1*elevatorDirection );
       m_rightElevator.set(-0.1 *elevatorDirection);
   

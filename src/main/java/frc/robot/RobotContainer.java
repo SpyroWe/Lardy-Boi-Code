@@ -21,6 +21,8 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.EndEffector;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.Commands.ClimberCommand;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -36,6 +38,7 @@ public class RobotContainer {
     private final CommandXboxController m_driverController = new CommandXboxController(0);
     private final CommandXboxController m_coDriverController = new CommandXboxController(1);
     private final EndEffector effectorbase = new EndEffector();
+    private final ClimberSubsystem ClimberBase = new ClimberSubsystem();
 ;
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
@@ -53,8 +56,8 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-joystick.getLeftY() * MaxSpeed/3) // Drive forward with negative Y (forward) Change speed here
-                    .withVelocityY(-joystick.getLeftX() * MaxSpeed/3) // Drive left with negative X (left)
+                drive.withVelocityX(-joystick.getLeftY() * MaxSpeed/2) // Drive forward with negative Y (forward) Change speed here
+                    .withVelocityY(-joystick.getLeftX() * MaxSpeed/2) // Drive left with negative X (left)
                     .withRotationalRate(-joystick.getRightX() * MaxAngularRate/2) // Drive counterclockwise with negative X (left)
             )
         );
@@ -71,6 +74,11 @@ public class RobotContainer {
         () ->m_driverController.leftTrigger().getAsBoolean(),
         () ->m_driverController.rightTrigger().getAsBoolean()
         ));
+
+        //climber
+        ClimberBase.setDefaultCommand(new ClimberCommand(ClimberBase,
+        ()-> m_coDriverController.leftBumper().getAsBoolean(),
+        ()-> m_coDriverController.rightBumper().getAsBoolean()));
 
 
 

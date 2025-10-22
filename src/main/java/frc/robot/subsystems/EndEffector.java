@@ -13,10 +13,10 @@ public EndEffector() {
 public void moveEffector (boolean leftTrigger,boolean rightTrigger){
     if(true){
     if(leftTrigger){
-        endeffectormotor.set(6);//2
+        endeffectormotor.set(13);//2
 
     }else if(rightTrigger){
-        endeffectormotor.set(-6);//2
+        endeffectormotor.set(-10);//2
     }else{
         endeffectormotor.stopMotor();
     }
